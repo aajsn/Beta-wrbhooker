@@ -72,11 +72,13 @@ async function handleSend() {
         let headers = {};
         let body;
         
+        // ★★★ 修正箇所: ここで回数表示を削除しました ★★★
         const messagePayload = {
-            content: `【${i}/${count}回目】 ${content}`,
+            content: content, // 回数表示なし
             username: "Webhook Sender Tool",
             tts: ttsEnabled
         };
+        // ★★★ 修正箇所ここまで ★★★
 
         try {
             if (fileInput.files.length > 0) {
@@ -85,7 +87,6 @@ async function handleSend() {
                 formData.append('payload_json', JSON.stringify(messagePayload));
                 formData.append('file', fileInput.files[0]);
                 body = formData;
-                // HeadersはFormDataを使用する場合、fetchが自動で設定するため空
             } else {
                 // ファイル添付なしの場合 (JSONを使用)
                 headers['Content-Type'] = 'application/json';
@@ -110,7 +111,6 @@ async function handleSend() {
                 i--; // カウンターを戻して再試行
                 continue;
             } else {
-                // 2xx以外のエラーはすべて失敗と見なす
                 const errorText = await response.text();
                 displayStatus(`❌ 第${i}回目: 失敗 (Status: ${response.status}) - ${errorText.substring(0, 50)}...`, 'error');
             }
