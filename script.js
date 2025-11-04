@@ -36,6 +36,11 @@ function sleep(ms) {
  */
 async function handleSend() {
     const url = document.getElementById('webhook-url').value.trim();
+    
+    // ★★★ 修正箇所: Webhook名の値を取得 ★★★
+    const customUsername = document.getElementById('webhook-username').value.trim();
+    // ★★★ ここまで ★★★
+    
     const content = document.getElementById('message-content').value.trim();
     const count = parseInt(document.getElementById('send-count').value) || 1;
     const startTimeMinutes = parseInt(document.getElementById('start-time').value) || 0;
@@ -72,13 +77,16 @@ async function handleSend() {
         let headers = {};
         let body;
         
-        // ★★★ 修正箇所: ここで回数表示を削除しました ★★★
         const messagePayload = {
-            content: content, // 回数表示なし
-            username: "Webhook Sender Tool",
+            content: content,
+            
+            // ★★★ 修正箇所: Webhook名を設定 ★★★
+            // 入力があればそれを使用し、なければデフォルトの"Webhook Sender Tool"を使用
+            username: customUsername || "Webhook Sender Tool",
+            // ★★★ ここまで ★★★
+            
             tts: ttsEnabled
         };
-        // ★★★ 修正箇所ここまで ★★★
 
         try {
             if (fileInput.files.length > 0) {
