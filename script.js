@@ -37,9 +37,8 @@ function sleep(ms) {
 async function handleSend() {
     const url = document.getElementById('webhook-url').value.trim();
     
-    // ★★★ 修正箇所: Webhook名の値を取得 ★★★
+    // Webhook名の値を取得
     const customUsername = document.getElementById('webhook-username').value.trim();
-    // ★★★ ここまで ★★★
     
     const content = document.getElementById('message-content').value.trim();
     const count = parseInt(document.getElementById('send-count').value) || 1;
@@ -80,10 +79,8 @@ async function handleSend() {
         const messagePayload = {
             content: content,
             
-            // ★★★ 修正箇所: Webhook名を設定 ★★★
-            // 入力があればそれを使用し、なければデフォルトの"Webhook Sender Tool"を使用
+            // Webhook名を設定: 入力があればそれを使用し、なければデフォルトを使用
             username: customUsername || "Webhook Sender Tool",
-            // ★★★ ここまで ★★★
             
             tts: ttsEnabled
         };
