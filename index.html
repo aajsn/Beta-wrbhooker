@@ -46,7 +46,7 @@
             box-sizing: border-box;
         }
         input[type="file"] {
-            padding: 5px; /* ファイル選択欄は少しpaddingを調整 */
+            padding: 5px;
         }
         .main-button {
             width: 100%;
@@ -84,7 +84,7 @@
             text-align: center;
             color: #FFFFFF;
             background-color: #7289DA;
-            display: none; /* 初期状態では非表示 */
+            display: none;
         }
         .footer-tag {
             position: absolute;
@@ -101,6 +101,9 @@
 
         <label for="webhook-url">Webhook URL</label>
         <input type="text" id="webhook-url" placeholder="https://discord.com/api/webhooks/...">
+
+        <label for="webhook-username">Webhook名 (任意)</label>
+        <input type="text" id="webhook-username" placeholder="例: カスタム通知Bot">
 
         <label for="message-content">Message</label>
         <input type="text" id="message-content" placeholder="送信するメッセージ">
